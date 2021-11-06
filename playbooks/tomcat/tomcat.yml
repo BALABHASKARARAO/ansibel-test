@@ -35,7 +35,7 @@
       debug:
         var: shfiles
     - set_fact:
-        tomcat_executables: "{{ shfiles.files | map(attribute='path') | list )}}"
+        tomcat_executables: "{{ shfiles.files | map(attribute='path') | list }}"
     - name: print the values
       debug:
         var: tomcat_executables
