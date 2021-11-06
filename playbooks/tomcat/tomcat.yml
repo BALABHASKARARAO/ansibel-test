@@ -26,3 +26,12 @@
         src: /tmp/apache-tomcat-9.0.54.tar.gz
         dest: /opt/tomcat
         remote_src: yes
+    - name: Find /var/log files equal or greater than 10 megabytes ending with .old or .log.gz
+      find:
+        paths: /var/log
+        patterns: "*.sh"
+      register: shfiles
+    - name: print sh files values
+      debug:
+        var: shfiles
+   
