@@ -17,7 +17,7 @@
         home: /opt/tomcat
         shell: /bin/false
         state: present
-    - name: download tomcat ap tar file
+    - name: download tomcat app tar file
       get_url:
         url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
         dest: /tmp
@@ -51,4 +51,18 @@
         path: "{{ item }}"
         mode: 0751
       with_items: "{{ tomcat_executables }}"
+    - name: create tomcat service file
+      ansible.builtin.copy:
+        src: tomcat.service
+        dest: /etc/systemd/system/tomcat.service
+    - name: reload and enable tomcat
+      ansible.builtin.systemd:
+        name: tomcat.service
+        daemon_reload: yes
+        enabled: yes
+        state: reloaded 
+    - name: ensure tomcat is running
+      ansible.builtin.systemd:
+        name: tomcat.service
+        state: started
    
