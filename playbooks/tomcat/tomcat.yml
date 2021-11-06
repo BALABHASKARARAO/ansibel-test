@@ -28,7 +28,7 @@
         remote_src: yes
     - name: find all the shell files in the binaries
       find: 
-        path: " /opt/tomcat/apache-tomcat-9.0.54/bin/"
+        path: " /opt/tomcat/apache-tomcat-9.0.54/bin"
         pattern: "*.sh"
       register: shfiles
     - name: print the values
