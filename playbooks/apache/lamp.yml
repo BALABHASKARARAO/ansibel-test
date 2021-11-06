@@ -1,0 +1,17 @@
+---
+- name: Install apache and php
+  hosts: all
+  become: yes
+  tasks:
+    - name: update ubuntu
+      apt: 
+        update_cache: yes
+    - name: apache on ubuntu
+      apt:
+        name:
+          - apache2
+          - maven
+          - php
+          - libapache2-mod-php
+          - php-mysql
+        state: present
