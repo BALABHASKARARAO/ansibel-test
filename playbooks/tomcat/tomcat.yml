@@ -39,4 +39,9 @@
     - name: print the values
       debug:
         var: tomcat_executables
+    - name: change permission of shell files
+      file:
+        path: "{{ item }}"
+        mode: 0751
+      with_items: "{{ tomcat_executables }}"
    
