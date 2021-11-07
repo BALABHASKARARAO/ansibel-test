@@ -10,7 +10,7 @@
           - nginx
           - apt-transport-https 
           - aspnetcore-runtime-3.1
-        stae: present
+        state: present
     - name: Enable nginx service
       service:
         name: nginx
