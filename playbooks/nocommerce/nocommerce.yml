@@ -15,8 +15,8 @@
     - name: Enable nginx service
       service:
         name: nginx
-          enabled: yes
-          state: started
+        enabled: yes
+        state: started
     - name: Creates directory
       file:
         path: /var/www/nopCommerce440
