@@ -62,5 +62,16 @@
         name: nopCommerce440.service
         daemon_reload: yes
         enabled: yes
-        state: reloaded    
+        state: reloaded  
+    - name: copy the nginx config file and restart nginx
+      copy:
+        src: static_site.cfg
+        dest: /etc/nginx/sites-available/static_site.cfg
+      become: yes
+    - name: create symlink
+      file:
+        src: /etc/nginx/sites-available/static_site.cfg
+        dest: /etc/nginx/sites-enabled/default
+        state: link
+      become: yes    
    
