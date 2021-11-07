@@ -51,8 +51,8 @@
         path: /var/www/nopCommerce440
         state: directory
         recurse: yes
-        owner: root
-        group: root
+        owner: www-data
+        group: www-data
     - name: create nopCommerce service file
       ansible.builtin.copy:
         src: nopCommerce440.service
@@ -65,13 +65,8 @@
         state: started
     - name: copy the nginx config file and restart nginx
       copy:
-        src: static_site.cfg
-        dest: /etc/nginx/sites-available/static_site.cfg
-    - name: create symlink
-      file:
-        src: /etc/nginx/sites-available/static_site.cfg
-        dest: /etc/nginx/sites-enabled/default
-        state: link 
+        src: default
+        dest: /etc/nginx/sites-available/default
     - name: restart nginx
       service:
         name: nginx
