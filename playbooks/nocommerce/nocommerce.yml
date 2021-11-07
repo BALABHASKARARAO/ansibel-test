@@ -1,9 +1,9 @@
 ---
-- name: Install tomcat
+- name: Install nopcommerce
   hosts: all
   become: yes
   tasks:
-    - name: update ubuntu
+    - name: apt packages download
       apt: 
         update_cache: yes
         name: 
@@ -24,7 +24,7 @@
     - name: install the debian package
       apt:
         deb: /tmp/packages-microsoft-prod.deb
-    - name: Download foo.conf
+    - name: Download nopcommerce
       get_url:
         url: https://github.com/nopSolutions/nopCommerce/releases/download/release-4.40.4/nopCommerce_4.40.4_NoSource_linux_x64.zip
         dest: /var/www/nopCommerce440
@@ -51,13 +51,13 @@
         path: /var/www/nopCommerce440
         state: directory
         recurse: yes
-        owner: nopCommerce440
-        group: nopCommerce440 
+        owner: root
+        group: root
     - name: create nopCommerce service file
       ansible.builtin.copy:
         src: nopCommerce440.service
         dest: /etc/systemd/system/nopCommerce440.service
-    - name: reload and enable tomcat
+    - name: reload and enable nopcommerce
       ansible.builtin.systemd:
         name: nopCommerce440.service
         daemon_reload: yes
