@@ -1,1 +1,25 @@
-iii
+---
+- name: Install tomcat
+  hosts: all
+  become: yes
+  tasks:
+    - name: update ubuntu
+      apt: 
+        update_cache: yes
+        name: 
+          - nginx
+          - apt-transport-https 
+          - aspnetcore-runtime-3.1
+        stae: present
+    - name: Enable nginx service
+      service:
+        name: nginx
+        enabled: yes
+        state: started
+    - name: download the debian file
+      get_url:
+        url: https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+        dest: /tmp/packages-microsoft-prod.deb
+    - name: install the debian package
+      apt:
+        deb: /tmp/packages-microsoft-prod.deb
