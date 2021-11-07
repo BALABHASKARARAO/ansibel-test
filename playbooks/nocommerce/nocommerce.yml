@@ -14,7 +14,7 @@
         state: present
     - name: Enable nginx service
       service:
-        - name: nginx
+        name: nginx
           enabled: yes
           state: started
     - name: Creates directory
