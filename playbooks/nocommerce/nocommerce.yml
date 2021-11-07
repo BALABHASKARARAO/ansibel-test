@@ -67,12 +67,14 @@
       copy:
         src: static_site.cfg
         dest: /etc/nginx/sites-available/static_site.cfg
-      become: yes
     - name: create symlink
       file:
         src: /etc/nginx/sites-available/static_site.cfg
         dest: /etc/nginx/sites-enabled/default
-        state: link
-      become: yes      
+        state: link 
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted    
       
    
